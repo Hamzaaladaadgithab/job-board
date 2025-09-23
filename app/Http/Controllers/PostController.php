@@ -8,20 +8,24 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
     function index() {
-        $data = Post::all();
+        $data = Post::Paginate(10);
 
         return view('post.index', ['posts' => $data , 'pagetitle' => 'Blog']);
 }
 
 
 function create(){
-    $postdata = Post::create([
-        'title' => 'New posts',
-        'body' => ' secondeThis is the body of the new post.',
-        'author' => 'Hamza',
-        'published' => true,
-    ]);
+
+    // $postdata = Post::create([
+    //     'title' => 'my find unique post 1 ',
+    //     'body' => ' This is the body of the new post.',
+    //     'author' => 'Hamza',
+    //     'published' => true,
+    // ]);
+
+    Post ::factory(200)->create();
 
     return redirect('/blog');
 }
