@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
-    // bunlar web icin 
+    // bunlar web icin
     /**
      * Display a listing of the resource.
      */
@@ -25,7 +25,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create', ['pagetitle' => 'Create new post']);
+
     }
 
     /**
@@ -50,7 +51,8 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Post::find($id);
+        return view('post.edit', ['post'=> $data , 'pagetitle' => 'Edit post']);
     }
 
     /**
