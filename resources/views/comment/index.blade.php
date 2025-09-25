@@ -1,5 +1,4 @@
 
-
 <x-layout :title="$pagetitle">
     <h2>comments exploring (testing)</h2>
 

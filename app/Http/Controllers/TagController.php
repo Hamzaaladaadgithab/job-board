@@ -2,72 +2,71 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-function index() {
-        $data = Tag::all();
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $tags = Tag::paginate(10);
 
-        return view('tag.index', ['tags' => $data , 'pagetitle' => 'Tags']);
-}
+        return view('tag.index', ['tags' => $tags, 'pagetitle' => 'Tags']);
+    }
 
-
-function create(){
-    Tag::create([
-        'title' => 'Software Engineering']);
-
-    return redirect('/tags');
-}
-
-
-
-    function testmanytomany(){
-    // $post1 = Post::find(6);
-    // $post2 = Post::find(7);
-
-    // if(!$post1 || !$post2) {
-    //     return response()->json(['error' => 'Post bulunamadı']);
-    // }
-
-    // $post1->tags()->attach([6,7]);
-    // $post2->tags()->attach([6]);
-
-    // return response()->json([
-    //     'post1' => $post1->tags,
-    //     'post2' => $post2->tags
-    // ]);
-
-
-
-    $tag = Tag::find(6);
-
-    $tag->posts()->attach([2]);
-
-    return response()->json(([
-        'tag' => $tag->title,
-        'posts' => $tag->posts,
-    ]));
-}
-
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('tag.create', ['pagetitle' => 'Create new tag']);
 
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $tag = Tag::find($id);
+        return view('tag.show', ['tag'=> $tag , 'pagetitle' => 'tag Detail']);
+    }
 
 
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $tag = Tag::find($id);
+        return view('tag.edit', ['tag'=> $tag , 'pagetitle' => 'Edit tag']);
+    }
 
 
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
 
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+}

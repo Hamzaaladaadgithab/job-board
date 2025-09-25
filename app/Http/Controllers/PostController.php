@@ -5,44 +5,67 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-
 class PostController extends Controller
 {
 
-    function index() {
+    // bunlar web icin 
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
         $data = Post::Paginate(10);
-
         return view('post.index', ['posts' => $data , 'pagetitle' => 'Blog']);
 }
+        //
 
 
-function create(){
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
 
-    // $postdata = Post::create([
-    //     'title' => 'my find unique post 1 ',
-    //     'body' => ' This is the body of the new post.',
-    //     'author' => 'Hamza',
-    //     'published' => true,
-    // ]);
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //@TODO
+    }
 
-    Post ::factory(200)->create();
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $post = Post::find($id);
+        return view('post.show', ['post'=> $post , 'pagetitle'=> $post->title]);
+    }
 
-    return redirect('/blog');
-}
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
 
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
 
-function show($id){
-    $post = Post::find($id);
-    return view('post.show', ['post'=> $post , 'pagetitle'=> $post->title]);
-
-}
-
-
-function delete(){
-
-    Post::destroy(4);
-}
-
-
-
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
 }

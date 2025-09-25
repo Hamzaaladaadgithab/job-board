@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\PostController;
@@ -9,33 +11,27 @@ use App\Models\Tag;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [IndexController::class , 'index']);
-
-Route::get('/about' , [IndexController::class,'about']);
-
-Route::get('/contact' , [IndexController::class,'contact']);
-
-Route::get('/job' , [IndexController::class,'index']);
 
 
-Route::get('/blog', [PostController::class,'index']);
+Route::get('/', IndexController::class );
 
-Route::get('/blog/create', [PostController::class,'create']);
+Route::get('/about' , AboutController::class);
 
-Route::get('/blog/delete', [PostController::class,'delete']);
+Route::get('/contact' , ContactController::class);
 
 
 
-Route::get('/blog/{id}', [PostController::class,'show']);
+Route::get('/job' , [JobController::class,'index']);
 
 
-Route::get('/comments', [CommentController::class,'index']);
-
-Route::get('/comments/create', [CommentController::class,'create']);
 
 
-Route::get('/tags', [TagController::class,'index']);
 
-Route::get('/tags/create', [TagController::class,'create']);
+Route::resource('blog', PostController::class);
 
-Route::get('/tags/test-many', [TagController::class,'testmanytomany']);
+Route::resource('comments', CommentController::class);
+
+Route::resource('tags', TagController::class);
+
+
+
