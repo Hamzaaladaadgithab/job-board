@@ -7,42 +7,31 @@
     <title>job board @isset($title)- {{ $title }}@endisset</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-
 </head>
-
-<h1 class="text-3xl font-bold underline">
-
-</h1>
-
 
 <body>
 
-<!-- Include this script tag or install `@tailwindplus/elements` via npm: -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
-<!--
-This example requires updating your template:
 
-```
-<html class="h-full bg-gray-900">
-<body class="h-full">
-```
--->
 <div class="min-h-full">
 <nav class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
     <div class="flex items-center">
-    <div class="shrink-0">
-        <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" class="size-8" />
+    <div class="flex-shrink-0">
+        <img
+    class="h-8 w-8"
+    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+    alt="Your Company"
+/>
+
         </div>
         <div class="hidden md:block">
         <div class="ml-10 flex items-baseline space-x-4">
         <!-- Current: "bg-gray-950/50 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
         <x-nav-link href="/"  id="ABD" :active="request()->is('/')">Dashboard</x-nav-link>
-        <x-nav-link href="/about" :active="request()->is('about')" >About Us</x-nav-link>
-        <x-nav-link href="/contact" :active="request()->is('contact')" >Contact Us</x-nav-link>
-
+        <x-nav-link href="/about" :active="request()->is('about')" >About</x-nav-link>
+        <x-nav-link href="/contact" :active="request()->is('contact')" >Contact</x-nav-link>
+        <x-nav-link href="/blog" :active="request()->is('blog')" >Blog</x-nav-link>
         </div>
         </div>
         </div>
@@ -57,17 +46,22 @@ This example requires updating your template:
         </button>
 
         <!-- Profile dropdown -->
-        <el-dropdown class="relative ml-3">
+
+        <!-- Profile dropdown -->
+<div class="relative ml-3">
+    <div>
         <button class="relative flex max-w-xs items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-        <span class="absolute -inset-1.5"></span>
-        <span class="sr-only">Open user menu</span>
-        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-8 rounded-full outline -outline-offset-1 outline-white/10" />
+            <span class="absolute -inset-1.5"></span>
+            <span class="sr-only">Open user menu</span>
+            <img
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                alt="User Profile"
+                class="h-8 w-8 rounded-full outline -outline-offset-1 outline-white/10"
+            />
         </button>
+    </div>
+</div>
 
-
-        </el-dropdown>
-        </div>
-        </div>
         <div class="-mr-2 flex md:hidden">
         <!-- Mobile menu button -->
         <button type="button" command="--toggle" commandfor="mobile-menu" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
@@ -90,7 +84,6 @@ This example requires updating your template:
         <a href="#" aria-current="page" class="block rounded-md bg-gray-950/50 px-3 py-2 text-base font-medium text-white">Dashboard</a>
         <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">About</a>
         <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Contact</a>
-
     </div>
     <div class="border-t border-white/10 pt-4 pb-3">
         <div class="flex items-center px-5">
@@ -109,25 +102,37 @@ This example requires updating your template:
             </svg>
         </button>
         </div>
-
     </div>
     </el-disclosure>
 </nav>
+
+
+
+
+
+
+<div class="border-b border-indigo-800" ></div>
+
 @if(isset($title))
-    <h1 class="text-3xl font-bold tracking-tight text-white">{{$title ?? ''}}</h1>
+    <h1 class="text-3xl font-bold tracking-tight text-black  ml-39 mt-4   mb-10">{{$title ?? ''}}</h1>
+
+    <div class="border-b border-indigo-800" ></div>
 
 <main>
-    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-    <!-- Your content -->
 
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+
+
+    <!-- Your content -->
     {{$slot}}
     </div>
 </main>
-
 @endif
+
+
+
+
 </div>
 
-
 </body>
-
 </html>

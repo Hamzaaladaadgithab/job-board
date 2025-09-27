@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -12,9 +14,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::paginate(10);
 
-        return view('comment.index', ['comments' => $comments , 'pagetitle' => 'comments']);
+        return redirect("/blog");
     }
 
     /**
@@ -22,16 +23,27 @@ class CommentController extends Controller
      */
     public function create()
     {
-        return view('comment.create', ['pagetitle' => 'Create new Comment']);
+        return  redirect("/blog");
     }
 
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        //
+        $post =Post::findOrFail($request->input('post_id'));
+        $comment = new Comment();
+
+        $comment->title = $request->input('author');
+        $comment->content = $request->input('content');
+        $comment->user_id = $request->input('post_id');
+
+        $comment->save();
+
+        return redirect("/bog/ {{$post->id}}")->with('success','comment added succssefully');
+
+
     }
 
     /**
@@ -39,8 +51,8 @@ class CommentController extends Controller
      */
     public function show(string $id)
     {
-        $comment = Comment::find($id);
-        return view('comment.show', ['comment'=> $comment , 'pagetitle' => 'Comment Detail']);
+        return redirect(to:'/blog');
+
     }
 
     /**
