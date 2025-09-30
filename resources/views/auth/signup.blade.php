@@ -59,10 +59,10 @@
                     <label for="password" class="block text-sm/6 font-medium text-black">Password</label>
                     <div class="mt-2">
                         <input id="password" type="password" name="password" required
-                         autocomplete="current-password"
+                        autocomplete="current-password"
                             class="border border-gray-300 block w-full rounded-md bg-white px-3 py-1.5
-                                   text-base text-gray-900 placeholder:text-gray-900
-                                   focus:outline-2 focus:outline-indigo-500 sm:text-sm/6" />
+                                text-base text-gray-900 placeholder:text-gray-900
+                                focus:outline-2 focus:outline-indigo-500 sm:text-sm/6" />
                     </div>
                 </div>
 
