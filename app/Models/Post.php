@@ -26,9 +26,15 @@ protected $fillable = [
     'body',
     'author',
     'published',
+    'user_id'
     ];
 
     protected $guarded = ['id'];
+
+    public function user(){
+        
+        return $this->belongsTo(User::class);
+    }
 
     public  function comments(){
 

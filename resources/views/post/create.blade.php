@@ -10,7 +10,7 @@
 
 
     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-         <div class="sm:col-span-3">
+         <div class="col-span-full">
           <label for="title" class="block text-sm/6 font-medium text-black">Title</label>
           <div class="mt-2">
             <input id="title" type="text"  value='{{old('title')}}'  name="title" autocomplete="given-name"
@@ -22,19 +22,7 @@
           @enderror
         </div>
 
-        <div class="sm:col-span-3">
-          <label for="author" class="block text-sm/6 font-medium text-black">Author</label>
-          <div class="mt-2">
-            <input id="author" type="text" value='{{old('author')}}' name="author"  autocomplete="family-name"
-             class=" block w-full rounded-md bg-black/5 px-3 py-1.5 text-base border {{ $errors->has('author') ? 'border-red-500' : 'border-gray-300' }}
-             text-black outline-1 -outline-offset-1 outline-black/10 placeholder:text-gray-500 focus:outline-2
-            focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
 
-          </div>
-          @error('author')
-            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
-          @enderror
-        </div>
 
         <div class="col-span-full">
           <label for="body" class="block text-sm/6 font-medium text-black">Content</label>

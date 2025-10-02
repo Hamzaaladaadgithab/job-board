@@ -52,9 +52,35 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
 
-    Route::resource('blog', PostController::class);
 
+  // admin
+
+Route::middleware('role:admin')->group(function(){
+
+Route::delete('/blog/{id}', [PostController::class,'destroy'])->name('blog.destroy');
+});
+
+
+
+// editor , admin
+Route::middleware('role:editor,admin')->group(function(){
+
+    Route::get('/blog/create', [PostController::class,'create'])->name('blog.create');
+    Route::post('/blog', [PostController::class,'store'])->name('blog.store');
+    Route::get('/blog/{post}/edit', [PostController::class,'edit'])->name('blog.edit')->can('apdate' , 'post');
+    Route::patch('/blog/{post}', [PostController::class,'update'])->name('blog.update')->can('apdate' , 'post');
+
+    });
+
+
+// viewer , admin , editor
+Route::middleware('role:viewer,editor,admin')->group(function(){
+
+    Route::get('/blog', [PostController::class,'index'])->name('blog.index');
+    Route::get('/blog/{id}', [PostController::class,'show'])->name('blog.show');
     Route::resource('comments', CommentController::class);
+
+    });
 
 
 });
@@ -65,4 +91,5 @@ Route::middleware('OnlyMe')->group(function () {
     Route::get('/about' , AboutController::class);
 
 });
+
 

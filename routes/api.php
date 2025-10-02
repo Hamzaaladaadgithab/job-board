@@ -33,7 +33,11 @@ use Illuminate\Support\Facades\Route;
     Route::post("login", [AuthController::class , 'login']);
 
 
-        // pnly if i am authenticade with jwt
+
+
+
+
+// pnly if i am authenticade with jwt
 
     Route::middleware("auth:api")->group( function(){
 

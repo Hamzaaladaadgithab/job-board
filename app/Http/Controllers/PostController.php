@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BlogPostRequest;
 use App\Models\Post;
+
+use Illuminate\Contracts\Auth\Access\Gate as AccessGate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
 
 class PostController extends Controller
 {
@@ -38,9 +43,9 @@ class PostController extends Controller
     {
         $post = new Post();
         $post->title = $request->input('title');
-        $post->author = $request->input('author');
         $post->body = $request->input('body');
         $post->published = $request->has('published') ? true : false;
+        $post->user_id = Auth::id();
 
 
         $post->save();
@@ -60,21 +65,19 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Post $post)
     {
-        $post = Post::findOrFail($id);
         return view('post.edit', ['post'=> $post , 'pagetitle' => 'Blog - Edit Post:' . $post->title]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(BlogPostRequest $request, string $id)
+    public function update(BlogPostRequest $request,Post $post)
     {
 
-        $post = Post::findOrFail($id);
+
         $post->title = $request->input('title');
-        $post->author = $request->input('author');
         $post->body = $request->input('body');
         $post->published = $request->has('published') ? true : false;
 
@@ -91,7 +94,7 @@ class PostController extends Controller
         $post= Post::findOrFail($id);
         $post->delete();
 
-        
+
         return redirect()->route('blog.index')->with('success',' Post deleted successfully.');
     }
 }
